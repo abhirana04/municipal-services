@@ -387,7 +387,7 @@ public class CalculatorUtils {
 	public MdmsCriteriaReq prepareWSTaxPeriodMdmsRequest(RequestInfo requestInfo, String serviceName, String tenantId) {
 		
 		String type=null;
-		if(tenantId=="pb.khanna")
+		if(tenantId.contains("pb.khanna"))
 		{
 			type="ANNUAL";
 		}
