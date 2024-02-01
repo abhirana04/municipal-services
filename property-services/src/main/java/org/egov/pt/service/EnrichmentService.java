@@ -108,10 +108,12 @@ public class EnrichmentService {
         RequestInfo requestInfo = request.getRequestInfo();
         AuditDetails auditDetailsForUpdate = propertyutil.getAuditDetails(requestInfo.getUserInfo().getUuid().toString(), true);
         propertyFromDb.setAuditDetails(auditDetailsForUpdate);
-        
+                String Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
+
         
 		Boolean isWfEnabled = config.getIsWorkflowEnabled();
 		Boolean iswfStarting = propertyFromDb.getStatus().equals(Status.ACTIVE);
+		Boolean isactiveexist = propertyFromDb.getStatus().equals(Status.INACTIVE);
 
 		if (!isWfEnabled) {
 
@@ -122,7 +124,12 @@ public class EnrichmentService {
 
 			enrichPropertyForNewWf(requestInfo, property, false);
 		}
-		
+
+	    else if (isWfEnabled && isactiveexist && Proptobestatus.equalsIgnoreCase("ACTIVE")) {
+
+			enrichPropertyForNewWf(requestInfo, property, false);
+		}
+			
 		if (!CollectionUtils.isEmpty(property.getDocuments()))
 			property.getDocuments().forEach(doc -> {
 
