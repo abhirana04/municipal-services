@@ -213,7 +213,7 @@ if(!request.getProperty().getCreationReason().equals(CreationReason.MUTATION))
 
 			if (state.getIsStartState() == true
 					&& state.getApplicationStatus().equalsIgnoreCase(Status.INWORKFLOW.toString())
-					&& !propertyFromSearch.getStatus().equals(Status.INWORKFLOW) && Proptobestatus.equalsIgnoreCase("INACTIVE")) {
+					&& !propertyFromSearch.getStatus().equals(Status.INWORKFLOW)) {
 
 				propertyFromSearch.setStatus(Status.INACTIVE);
 				producer.push(config.getUpdatePropertyTopic(), OldPropertyRequest);
@@ -222,16 +222,16 @@ if(!request.getProperty().getCreationReason().equals(CreationReason.MUTATION))
 
 			}
 
-				else if (state.getIsStartState() == true
-					&& state.getApplicationStatus().equalsIgnoreCase(Status.INWORKFLOW.toString())
-					&& !propertyFromSearch.getStatus().equals(Status.INWORKFLOW) && Proptobestatus.equalsIgnoreCase("ACTIVE")) {
+			// 	else if (state.getIsStartState() == true
+			// 		&& state.getApplicationStatus().equalsIgnoreCase(Status.INWORKFLOW.toString())
+			// 		&& !propertyFromSearch.getStatus().equals(Status.INWORKFLOW) && Proptobestatus.equalsIgnoreCase("ACTIVE")) {
 
-				propertyFromSearch.setStatus(Status.ACTIVE);
-				producer.push(config.getUpdatePropertyTopic(), OldPropertyRequest);
-				util.saveOldUuidToRequest(request, propertyFromSearch.getId());
-				producer.push(config.getSavePropertyTopic(), request);
+			// 	propertyFromSearch.setStatus(Status.ACTIVE);
+			// 	producer.push(config.getUpdatePropertyTopic(), OldPropertyRequest);
+			// 	util.saveOldUuidToRequest(request, propertyFromSearch.getId());
+			// 	producer.push(config.getSavePropertyTopic(), request);
 
-			}
+			// }
 			
 			else if (state.getIsTerminateState()
 					&& !state.getApplicationStatus().equalsIgnoreCase(Status.ACTIVE.toString())) {
