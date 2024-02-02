@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+import org.egov.pt.models.enums.CreationReason;
 
 @Service
 public class EnrichmentService {
@@ -108,8 +109,11 @@ public class EnrichmentService {
         RequestInfo requestInfo = request.getRequestInfo();
         AuditDetails auditDetailsForUpdate = propertyutil.getAuditDetails(requestInfo.getUserInfo().getUuid().toString(), true);
         propertyFromDb.setAuditDetails(auditDetailsForUpdate);
-                String Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
-
+             String Proptobestatus="";
+        if(request.getProperty().getCreationReason().equals(CreationReason.STATUS))
+        {
+        	Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
+        }
         
 		Boolean isWfEnabled = config.getIsWorkflowEnabled();
 		Boolean iswfStarting = propertyFromDb.getStatus().equals(Status.ACTIVE);
