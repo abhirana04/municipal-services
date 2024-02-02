@@ -209,7 +209,7 @@ if(!request.getProperty().getCreationReason().equals(CreationReason.MUTATION))
 		if(config.getIsWorkflowEnabled()) {
 
 			State state = wfService.updateWorkflow(request, CreationReason.UPDATE);
-			String Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
+			//String Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
 
 			if (state.getIsStartState() == true
 					&& state.getApplicationStatus().equalsIgnoreCase(Status.INWORKFLOW.toString())
