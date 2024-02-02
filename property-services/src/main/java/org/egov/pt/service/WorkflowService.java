@@ -111,7 +111,11 @@ public class WorkflowService {
 	public State updateWorkflow(PropertyRequest request, CreationReason creationReasonForWorkflow) {
 
 		Property property = request.getProperty();
-		String Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
+		String Proptobestatus="";
+		if(request.getProperty().getCreationReason().equals(CreationReason.STATUS))
+		{
+		 Proptobestatus=request.getProperty().getAdditionalDetails().get("propertytobestatus").asText();
+		}
 		ProcessInstanceRequest workflowReq = utils.getWfForPropertyRegistry(request, creationReasonForWorkflow);
 		State state = callWorkFlow(workflowReq);
 		
